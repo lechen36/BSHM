@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>表单</title>
+    <link rel="stylesheet" href="../../static/frame/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/frame/static/css/style.css">
+    <link rel="icon" href="../../static/frame/static/image/code.png">
+</head>
+<body class="body">
+    <form class="layui-form layui-form-pane" action="">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <select name="quiz1">
+                    <option value="">空</option>
+                    <option value="B01">B01</option>
+                    <option value="B02">B02</option>
+                    <option value="B03">B03</option>
+                    <option value="B04">B02</option>
+                    <option value="B05">B03</option>
+                </select>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">开始时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="date" id="date1" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">结束时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="date" id="date2" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-input-block">
+                    <a href=""><input type="button" name="button" value="计算" class="layui-btn"></a>
+                </div>
+            </div>
+        </div>
+    </form>
+    <fieldset class="layui-elem-field site-demo-button">
+        <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+        <blockquote class="layui-elem-quote layui-quote-nm">
+            安全提示：   
+            <br>桥塔无主导风向，主梁位置主导风向为“SSW”，风速在1级预警范围内，小于颤振临界风速32.5m/s，对桥梁安全及行车安全影响较小。
+        </blockquote>
+        
+        <div id="main-line" style="width: 90%;height:800px;"></div> 
+        <script type="text/javascript" src="../../static/frame/layui/layui.js"></script>
+        <script type="text/javascript" src="../../static/frame/echarts/echarts.min.js"></script>
+        <script>
+            layui.use(['form', 'layedit', 'laydate'], function () {
+                var form = layui.form
+                    , layer = layui.layer
+                    , layedit = layui.layedit
+                    , laydate = layui.laydate;
+
+                //日期
+                laydate.render({
+                    elem: '#date1'
+                });
+                laydate.render({
+                    elem: '#date2'
+                });
+
+                //监听提交
+                form.on('submit(demo1)', function (data) {
+                    layer.alert(JSON.stringify(data.field), {
+                        title: '最终的提交信息'
+                    });
+                    return false;
+                });
+
+
+            });
+        </script>
+
+        <script type="text/javascript">
+            
+            // 基于准备好的dom，初始化echarts实例
+            var chart = echarts.init(document.getElementById('main-line'));
+
+            // 配置
+            maxWind = 10;
+            chart.setOption( {
+                title: {
+                    text: '风速风向图'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    x: 'center',
+                    data: ['塔顶1-1', '塔顶1-2', '塔顶2-1', '塔顶2-2', '主梁']
+                },
+                radar: [
+                    {
+                        indicator: [
+                            { text: 'N', max: maxWind },
+                            { text: 'NNW', max: maxWind },
+                            { text: 'NW', max: maxWind },
+                            { text: 'WNW', max: maxWind },
+                            { text: 'W', max: maxWind },
+                            { text: 'WSW', max: maxWind },
+                            { text: 'SW', max: maxWind },
+                            { text: 'SSW', max: maxWind },
+                            { text: 'S', max: maxWind },
+                            { text: 'SSE', max: maxWind },
+                            { text: 'ESE', max: maxWind },
+                            { text: 'SE', max: maxWind },
+                            { text: 'E', max: maxWind },
+                            { text: 'ENE', max: maxWind },
+                            { text: 'NE', max: maxWind },
+                            { text: 'NNE', max: maxWind }
+                        ],
+                        center: ['20%', '20%'],
+                        radius: 100
+                    },
+                    {
+                        indicator: [
+                            { text: 'N', max: maxWind },
+                            { text: 'NNW', max: maxWind },
+                            { text: 'NW', max: maxWind },
+                            { text: 'WNW', max: maxWind },
+                            { text: 'W', max: maxWind },
+                            { text: 'WSW', max: maxWind },
+                            { text: 'SW', max: maxWind },
+                            { text: 'SSW', max: maxWind },
+                            { text: 'S', max: maxWind },
+                            { text: 'SSE', max: maxWind },
+                            { text: 'ESE', max: maxWind },
+                            { text: 'SE', max: maxWind },
+                            { text: 'E', max: maxWind },
+                            { text: 'ENE', max: maxWind },
+                            { text: 'NE', max: maxWind },
+                            { text: 'NNE', max: maxWind }
+                        ],
+                        center: ['50%', '20%'],
+                        radius: 100
+                    },
+                    {
+                        indicator: [
+                            { text: 'N', max: maxWind },
+                            { text: 'NNW', max: maxWind },
+                            { text: 'NW', max: maxWind },
+                            { text: 'WNW', max: maxWind },
+                            { text: 'W', max: maxWind },
+                            { text: 'WSW', max: maxWind },
+                            { text: 'SW', max: maxWind },
+                            { text: 'SSW', max: maxWind },
+                            { text: 'S', max: maxWind },
+                            { text: 'SSE', max: maxWind },
+                            { text: 'ESE', max: maxWind },
+                            { text: 'SE', max: maxWind },
+                            { text: 'E', max: maxWind },
+                            { text: 'ENE', max: maxWind },
+                            { text: 'NE', max: maxWind },
+                            { text: 'NNE', max: maxWind }
+                        ],
+                        center: ['80%', '20%'],
+                        radius: 100
+                    }
+
+
+                ],
+                series: [
+                    {
+                        type: 'radar',
+                        tooltip: {
+                            trigger: 'item'
+                        },
+                        itemStyle: { normal: { areaStyle: { type: 'default' } } },
+                        data: [
+                            {
+                                value: [3.1, 3.8, 4.8, 5.4, 5.0, 4.4, 5.8, 4.1, 1.6, 1.3, 1.6, 2.5, 3.0, 3.4, 5.2, 3.3
+                                ],
+                                name: '塔顶1-1'
+                            },
+                            {
+                                value: [3.4, 3.9, 4.2, 5.8, 5.9, 4.0, 4.8, 4.7, 2.6, 1.6, 0.6, 1.5, 2.0, 3.4, 5.7, 2.3
+                                ],
+                                name: '塔顶1-2'
+                            }
+                        ]
+                    },
+                    {
+                        type: 'radar',
+                        radarIndex: 1,
+                        tooltip: {
+                            trigger: 'item'
+                        },
+                        itemStyle: { normal: { areaStyle: { type: 'default' } } },
+                        data: [
+                            {
+                                value: [6.0, 4.6, 6.5, 8.7, 7.8, 6.2, 5.9, 2.8, 3.7, 4.9, 3.3, 5.9, 4.1, 5.0, 6.3, 8.3
+                                ],
+                                name: '塔顶2-1'
+                            },
+                            {
+                                value: [6.5, 2.7,2.8, 1.2, 2.9, 3.8, 5.7, 4.9, 3.3, 5.9, 4.1, 5.0, 6.3, 8.3, 6.2, 5.8
+                                ],
+                                name: '塔顶2-2'
+                            }
+                        ]
+                    },
+                    {
+                        type: 'radar',
+                        radarIndex: 2,
+                        tooltip: {
+                            trigger: 'item'
+                        },
+                        itemStyle: { normal: { areaStyle: { type: 'default' } } },
+                        data: [
+                            {
+                                value: [1.4, 1.7, 2.5, 2.5, 2.2, 2.2, 2.3, 8.2, 7.3, 6.5, 4.2, 2.4, 1.8, 1.1, 2.0, 2.3
+                                ],
+                                name: '主梁'
+                            }
+                        ]
+                    }
+                ]
+            });
+
+            
+        </script>
+
+    </fieldset>
+
+
+
+
+
+</body>
+</html>
